@@ -1,11 +1,17 @@
 from scripts.busqueda import busqueda_eventos
-from scripts.procesar_resultados import limpiar_resultados
+from scripts.limpiar_resultados import limpiar_resultados
+from scripts.scraper import scrapear_paginas
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def run():
     print("Iniciando búsqueda.")
     busqueda_eventos()
     print("Limpiando resultados.")
     limpiar_resultados()
+    print("Scrapeando páginas.")
+    scrapear_paginas()
 
 if __name__ == "__main__":
     run()
