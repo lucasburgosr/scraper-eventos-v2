@@ -4,7 +4,6 @@ import json
 import pandas as pd
 from datetime import datetime
 
-
 def scrapear_paginas():
 
     contador = 0
@@ -29,9 +28,9 @@ def scrapear_paginas():
 
         with open("./data/páginas_escrapeadas.jsonl", "a", encoding="utf-8") as f:
 
-            for index, row in df_resultados.iterrows():
+            for row in df_resultados.itertuples(index=False):
                 try:
-                    response = client.get(row["link"])
+                    response = client.get(row.link)
                     response.raise_for_status()
                     html = response.text
                     soup = BeautifulSoup(html, "html.parser")
@@ -46,22 +45,21 @@ def scrapear_paginas():
                     if soup.title and soup.title.string:
                         title = soup.title.string.strip()
                     else:
-                        title = row["title"]
+                        title = row.title
 
-                    data = {"link": row["link"], "title": title,
+                    data = {"link": row.link, "title": title,
                             "content": contenido_recortado}
 
                     json_line = json.dumps(data, ensure_ascii=False)
 
                     f.write(json_line + "\n")
-
+                    f.flush()
                     contador += 1
-
                     print(f"Links scrapeados: {contador}")
 
                 except (httpx.HTTPStatusError, httpx.TimeoutException, httpx.NetworkError) as e:
                     print(
-                        f"Error al intentar obtener el HTML de esta página: {row['link']}")
+                        f"Error al intentar obtener el HTML de esta página: {row.link}")
                     print(f"Error: {e}")
                     print("No se registrará en el JSONL.")
 
