@@ -26,7 +26,7 @@ def scrapear_paginas():
         df_resultados = pd.read_csv(
             f"./data/resultados_limpios_20251128.csv", sep=";")
 
-        with open("./data/páginas_escrapeadas.jsonl", "a", encoding="utf-8") as f:
+        with open("./data/paginas_scrapeadas.jsonl", "a", encoding="utf-8") as f:
 
             for row in df_resultados.itertuples(index=False):
                 try:

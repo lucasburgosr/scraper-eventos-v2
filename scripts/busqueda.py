@@ -1,7 +1,13 @@
-import httpx
+import httpx, os, sys
 import time
 from datetime import datetime
 import pandas as pd
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(ROOT_DIR)
+if PARENT_DIR not in sys.path:
+    sys.path.append(PARENT_DIR)
+
 from utils.dependencias import start, tipos_evento, GCS_API_KEY, ENGINE_ID
 
 
@@ -28,8 +34,7 @@ def busqueda_eventos():
                     cse_id=ENGINE_ID,
                     query=query,
                     gl="ar", cr="countryAR", lr="lang_es",
-                    sort="date",
-                    dateRestrict="d30",
+                    sort="date:r:20250401:20250430",
                     start=i
                 )
 
@@ -62,3 +67,5 @@ def busqueda_eventos():
               index=False,
               sep=";",
               encoding="utf-8")
+
+busqueda_eventos()
