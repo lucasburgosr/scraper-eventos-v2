@@ -96,10 +96,9 @@ La frecuencia del evento tiene que ser una de estas:
 
 REGLAS DE EXTRACCIÓN:
 1. PRECISIÓN: Extrae solo la información explícita en el texto. No inventes datos.
-2. VALORES FALTANTES: Si un campo no aparece en el texto, usa el valor por defecto "Desconocido" o null según corresponda en el esquema.
-3. FECHAS: Convierte siempre las fechas al formato estandar ISO 8601 (YYYY-MM-DD). Si el año no es explícito, asume el año actual o el próximo lógico según el contexto del evento.
-4. NOMBRES: Limpia los nombres de eventos (elimina "Bienvenido al...", "Home - ...").
-5. BOOLEANOS: El campo 'requiere_revision' debe ser True si la información clave (fecha o lugar) es ambigua o no se encuentra.
+2. FECHAS: Convierte siempre las fechas al formato estandar ISO 8601 (YYYY-MM-DD). Si el año no es explícito, asume el año actual o el próximo lógico según el contexto del evento pero **NUNCA insertes un valor que no cumpla con el formato específico de fecha**.
+3. NOMBRES: Limpia los nombres de eventos (elimina "Bienvenido al...", "Home - ...").
+4. BOOLEANOS: El campo 'requiere_revision' debe ser True si la información clave (fecha o lugar) es ambigua o no se encuentra.
 
 """
 

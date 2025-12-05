@@ -1,6 +1,7 @@
 from groq import Groq
 import pandas as pd
 import json, os, time, sys, instructor
+from instructor.core import InstructorError
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(ROOT_DIR)
@@ -13,7 +14,7 @@ from models.evento_schema import Evento
 client_filtro = Groq()
 
 client_clasificacion = Groq()
-client_clasificacion = instructor.from_provider("groq/llama-3.1-8b-instant")
+client_clasificacion = instructor.from_provider("groq/llama-3.3-70b-versatile")
 
 def filtrar():
 
@@ -49,25 +50,30 @@ def clasificar():
     
     with open(eventos_clasificados, 'a', encoding='utf-8') as f:
         for pagina in iterador(paginas_filtradas):
-            response = client_clasificacion.create(
-                messages=[
-                    {
-                        'role': 'system',
-                        'content': prompt_clasificacion
-                    },
-                    {
-                        'role': 'user',
-                        'content': f'Contenido web: {pagina['content']}'
-                    }
-                ],
-                response_model=Evento
-            )
-        
-            if response:
-                evento_dict = response.model_dump(mode='json')
-                json_line = json.dumps(evento_dict, ensure_ascii=False)
-                f.write(json_line + '\n')
-                f.flush()
-                print(f"Evento guardado: {pagina['link']}")
+            try:
+                response = client_clasificacion.create(
+                    messages=[
+                        {
+                            'role': 'system',
+                            'content': prompt_clasificacion
+                        },
+                        {
+                            'role': 'user',
+                            'content': f'Contenido web: {pagina['content']}'
+                        }
+                    ],
+                    response_model=Evento
+                )
+            
+                if response:
+                    evento_dict = response.model_dump(mode='json')
+                    json_line = json.dumps(evento_dict, ensure_ascii=False)
+                    f.write(json_line + '\n')
+                    f.flush()
+                    print(f"Evento guardado: {pagina['link']}")
+            except InstructorError as e:
+                print(f'Error intentando procesar el evento {pagina['title']}')
+                print(f'{e}')
 
-filtrar()
+
+clasificar()
