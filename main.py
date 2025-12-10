@@ -1,5 +1,5 @@
 from scripts.busqueda import busqueda_eventos
-from scripts.limpiar_resultados import limpiar_resultados
+from scripts.limpieza_de_datos import limpiar_resultados
 from scripts.scraper import scrapear_paginas
 from scripts.llm import filtrar, clasificar
 from dotenv import load_dotenv

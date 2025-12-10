@@ -24,9 +24,9 @@ def scrapear_paginas():
 
     with httpx.Client(headers=headers) as client:
         df_resultados = pd.read_csv(
-            f"./data/resultados_limpios_20251128.csv", sep=";")
+            f"./data/csv/resultados_limpios_{datetime.today().strftime('%Y%m%d')}.csv", sep=";")
 
-        with open("./data/paginas_scrapeadas.jsonl", "a", encoding="utf-8") as f:
+        with open("./data/jsonl/paginas_scrapeadas.jsonl", "a", encoding="utf-8") as f:
 
             for row in df_resultados.itertuples(index=False):
                 try:

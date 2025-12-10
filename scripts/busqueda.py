@@ -34,7 +34,7 @@ def busqueda_eventos():
                     cse_id=ENGINE_ID,
                     query=query,
                     gl="ar", cr="countryAR", lr="lang_es",
-                    sort="date:r:20250401:20250430",
+                    sort="date:r:20250501:20250531",
                     start=i
                 )
 
@@ -63,9 +63,9 @@ def busqueda_eventos():
         return
 
     df = pd.DataFrame(resultados_acumulados)
-    df.to_csv(f"./data/resultados_{datetime.today().strftime('%Y%m%d')}.csv",
+    df.to_csv(f"./data/csv/resultados_{datetime.today().strftime('%Y%m%d')}.csv",
               index=False,
               sep=";",
               encoding="utf-8")
-
+    
 busqueda_eventos()
