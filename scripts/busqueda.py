@@ -34,7 +34,7 @@ def busqueda_eventos():
                     cse_id=ENGINE_ID,
                     query=query,
                     gl="ar", cr="countryAR", lr="lang_es",
-                    sort="date:r:20250501:20250531",
+                    sort="date:r:20250801:20250831",
                     start=i
                 )
 

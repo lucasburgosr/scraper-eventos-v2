@@ -135,7 +135,7 @@ def iterador(ruta: str):
                 print(f"Error de formato JSON en la línea {numero_linea}")
 
 
-def jsonl_a_csv_robusto(archivo_entrada, archivo_salida):
+def json_a_csv(archivo_entrada, archivo_salida):
     data = []
     errores = 0
 
@@ -165,3 +165,5 @@ def jsonl_a_csv_robusto(archivo_entrada, archivo_salida):
             print(f"Registros corruptos omitidos: {errores}")
     else:
         print("No se pudieron recuperar datos válidos del archivo.")
+
+json_a_csv("./data/jsonl/eventos_con_sede_corregida.jsonl", "./data/csv/eventos_con_sede_corregida.csv")

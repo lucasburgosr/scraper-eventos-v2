@@ -4,7 +4,6 @@ import json
 import time
 from rapidfuzz import process
 from rapidfuzz import fuzz
-from utils.dependencias import iterador
 
 def limpiar_resultados():
     resultados_df = pd.read_csv(
@@ -18,3 +17,5 @@ def limpiar_resultados():
         sep=";",
         index=False,
         encoding="utf-8")
+    
+limpiar_resultados()
