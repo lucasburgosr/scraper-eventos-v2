@@ -40,6 +40,7 @@ prompt_filtro = """Sos un **clasificador de contenido web**. Tu tarea es revisar
 - Efemérides, conmemoraciones o días del tipo "Día del Médico" o "Día del maestro"
 - Programas del gobierno como "La Garrafa en tu Barrio"
 - Reuniones de consejo de cualquier tipo de institución
+- Jornadas de capacitación
 
 Cuando el contenido corresponda a un evento, tu respuesta tiene que ser 'SI', y cuando no corresponda tenés que responder 'NO'. **Tu respuesta debe limitarse únicamente a esas dos palabras**, ni una sola más."""
 
@@ -97,6 +98,12 @@ La frecuencia del evento tiene que ser una de estas:
 - Cuatrienal
 - Irregular
 - NS/NC
+
+Si la entidad organizadora es una universidad (Universidad Nacional de Cuyo, Universidad de Mendoza, etc.)
+vas a repetir exactamente el mismo valor para la sede. Por ejemplo: si la entidad organizadora es Universidad de Mendoza, la sede va a ser Universidad de Mendoza.
+
+Si la entidad organizadora pertenece al Gobierno de Mendoza (por ej. Prensa Gobierno, Dirección General de Escuelas o cualquier repartición perteneciente al gobierno)
+vas a asignar "Gobierno de Mendoza" como entidad organizadora.
 
 REGLAS DE EXTRACCIÓN:
 1. PRECISIÓN: Extrae solo la información explícita en el texto. No inventes datos.
@@ -166,4 +173,4 @@ def json_a_csv(archivo_entrada, archivo_salida):
     else:
         print("No se pudieron recuperar datos válidos del archivo.")
 
-json_a_csv("./data/jsonl/eventos_con_sede_corregida.jsonl", "./data/csv/eventos_con_sede_corregida.csv")
+# json_a_csv("./data/jsonl/eventos_con_sede_corregida_abril.jsonl", "./data/csv/eventos_con_sede_corregida_abril.csv")

@@ -32,7 +32,7 @@ def filtrar():
                         "content": f"Contenido web: {pagina['content']}"
                     }
                 ],
-                model="llama-3.1-8b-instant"
+                model="openai/gpt-oss-20b"
             )
 
             check = (response.choices[0].message.content).strip().upper().replace(".", "")
@@ -85,11 +85,11 @@ def revisar_sede():
 
     print(f"Lista de sedes obtenida: {lista_sedes[0]}")
 
-    with open("./data/jsonl/eventos_con_sede_corregida.jsonl", "a", encoding="utf-8") as f:
+    with open("./data/jsonl/eventos_con_sede_corregida_abril.jsonl", "a", encoding="utf-8") as f:
 
         print(f"Iterando sobre los eventos disponibles")
 
-        for evento in iterador("./data/jsonl/eventos_clasificados_prueba.jsonl"):
+        for evento in iterador("./data/jsonl/eventos_clasificados_abril.jsonl"):
 
             print(f"Revisando evento: {evento['nombre']}")
 
@@ -121,7 +121,7 @@ def revisar_sede():
                                         """)
                         }
                     ],
-                    model="llama-3.1-8b-instant"
+                    model="llama-3.3-70b-versatile"
                 )
 
                 print("Sede definida con LLM")
