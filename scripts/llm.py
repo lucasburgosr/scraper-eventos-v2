@@ -32,7 +32,7 @@ def filtrar():
                         "content": f"Contenido web: {pagina['content']}"
                     }
                 ],
-                model="openai/gpt-oss-20b"
+                model="openai/gpt-oss-120b"
             )
 
             check = (response.choices[0].message.content).strip().upper().replace(".", "")
@@ -85,11 +85,11 @@ def revisar_sede():
 
     print(f"Lista de sedes obtenida: {lista_sedes[0]}")
 
-    with open("./data/jsonl/eventos_con_sede_corregida_abril.jsonl", "a", encoding="utf-8") as f:
+    with open("./data/jsonl/eventos_con_sede_corregida_septiembre.jsonl", "a", encoding="utf-8") as f:
 
         print(f"Iterando sobre los eventos disponibles")
 
-        for evento in iterador("./data/jsonl/eventos_clasificados_abril.jsonl"):
+        for evento in iterador("./data/jsonl/eventos_clasificados.jsonl"):
 
             print(f"Revisando evento: {evento['nombre']}")
 
@@ -132,4 +132,4 @@ def revisar_sede():
             json_line = json.dumps(evento, ensure_ascii=False)
             f.write(json_line + "\n")
 
-filtrar()
+revisar_sede()

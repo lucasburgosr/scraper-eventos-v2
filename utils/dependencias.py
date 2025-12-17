@@ -12,8 +12,8 @@ ENGINE_ID = os.getenv("EMETUR_SEARCH_ENGINE")
 
 sedes_df = pd.read_csv("./data/csv/sedes.csv", sep=";")
 sedes = sedes_df["Nombre"].dropna().tolist()
-tipos_evento = ["Jornada", "Encuentro", "Congreso", "Conferencia", "Exposición", "Seminario",
-                "Evento Deportivo Internacional", "Simposio", "Convencion", "Feria"]
+tipos_evento = ["Jornada", "Encuentro", "Congreso", "Conferencia", "Exposición",
+                "Seminario", "Simposio", "Convencion", "Feria", "Evento Deportivo Internacional"]
 
 start = [1, 11, 21, 31, 41, 51, 61, 71, 81, 91]
 
@@ -41,6 +41,11 @@ prompt_filtro = """Sos un **clasificador de contenido web**. Tu tarea es revisar
 - Programas del gobierno como "La Garrafa en tu Barrio"
 - Reuniones de consejo de cualquier tipo de institución
 - Jornadas de capacitación
+- Jornadas remuneradas para capacitación de docentes
+- Eventos en los que hayan participado funcionarios públicos de Mendoza (por ej. el gobernador) pero se realicen en otra provincia
+- Eventos que tengan menos de 4 horas de duración
+- Operativos de seguridad (por ej. controles policiales)
+- Expo Educativa
 
 Cuando el contenido corresponda a un evento, tu respuesta tiene que ser 'SI', y cuando no corresponda tenés que responder 'NO'. **Tu respuesta debe limitarse únicamente a esas dos palabras**, ni una sola más."""
 
@@ -173,4 +178,6 @@ def json_a_csv(archivo_entrada, archivo_salida):
     else:
         print("No se pudieron recuperar datos válidos del archivo.")
 
-# json_a_csv("./data/jsonl/eventos_con_sede_corregida_abril.jsonl", "./data/csv/eventos_con_sede_corregida_abril.csv")
+
+json_a_csv("./data/jsonl/eventos_con_sede_corregida_septiembre.jsonl",
+           "./data/csv/eventos_con_sede_corregida_septiembre.csv")
